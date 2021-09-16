@@ -1,0 +1,149 @@
+<html>
+
+<head>
+    <title>Banco</title>
+</head>
+
+<body>
+    <script>
+        var senha = 3589;
+        var saldo = 100.0;
+
+        alert("Bem-vindo(a) ao Santander!")
+        var nome = prompt("Insira seu nome:");
+
+        alert("Olá, " + nome + "! É um prazer ter você aqui!");
+
+		function inicio(){
+
+        var escolha = parseInt(prompt('Selecione uma opção (1. Saldo) (2. Extrato) (3. Saque) (4. Depósito) (5. Transferência) (6. Sair)'));
+
+        switch (escolha) {
+            case 1:
+                ver_saldo();
+                break
+            case 2:
+                extrato();
+                break
+            case 3:
+                fazer_saque();
+                break
+            case 4:
+                fazer_deposito();
+                break
+            case 5:
+                transferencia();
+                break
+            case 6:
+                sair();
+                break
+            default:
+                erro();
+                break
+			}
+		}	
+        //  Saldo, Extrato, Saque, Depósito, Transferência e Sair. 
+        function ver_saldo() {
+            pedir_senha();
+            alert('Seu saldo atual é de R$: ' + saldo);
+            inicio();
+        }
+
+        function extrato() {
+            pedir_senha();
+            alert("Santander - Extratos \n (14/09/21) Tranferência: R$150,00 \n (14/09/21) Carrefour: R$70,00 \n (14/09/21) Saque: R$80,00");
+            inicio();
+        }
+
+        function fazer_saque() {
+            pedir_senha();
+            var saque = parseFloat(prompt('Qual o valor para saque?'));
+            if (isNaN(saque) || saque === '') {
+                alert('Por favor, informe um número:');
+                fazer_saque();
+            } if (saque > saldo) {
+                alert("Operação não autorizada.");
+                fazer_saque();
+            } if (saque <= 0) {
+                alert("Operação não autorizada.");
+                fazer_saque();
+            } else {
+                saldo -= saque;
+                ver_saldo();
+				inicio();
+            }
+        }
+
+        function fazer_deposito() {
+            var deposito = parseFloat(prompt('Qual o valor para depósito?'));
+            if (isNaN(deposito) || deposito === '') {
+                alert('Por favor, informe um número:');
+                fazer_deposito();
+            }
+            else if (deposito <= 0) {
+                alert("Operação não autorizada.");
+                fazer_deposito();
+				escolha();
+            } else {
+                saldo += deposito;
+                ver_saldo();
+				inicio();
+            }
+        }
+
+        function transferencia() {
+            pedir_senha();
+            var conta = parseFloat(prompt('Qual o número da conta?'));
+            if (isNaN(conta) || conta === '') {
+                alert('Por favor, informe um número:');
+                transferencia();
+            }
+            var transferencia = parseFloat(prompt('Qual o valor para transferência?'));
+            if (isNaN(transferencia) || transferencia === '') {
+                alert('Por favor, informe um número:');
+                transferencia();
+            }
+            if (transferencia > saldo) {
+                alert("Saldo insuficiente.");
+                transferencia();
+            }
+            else if (transferencia <= 0) {
+                alert("Operação não autorizada.");
+                transferencia();
+            } else {
+                saldo -= transferencia;
+                alert("Transferência efetuada com sucesso para a conta " + conta + "\n Saldo atual R$:" + saldo);
+                inicio();
+            }
+        }
+
+        function pedir_senha() {
+            var senha_usuario = Number(prompt("Digite sua senha"));
+            if (senha_usuario === senha) {
+                alert("Senha correta.");
+            } else {
+                alert("Senha incorreta, tente novamente.");
+                senha();
+            }
+        }
+
+        function erro() {
+            alert('Por favor, informe um número entre 1 e 6');
+            inicio();
+        }
+
+        function sair() {
+            var confirma = confirm('Você deseja sair?');
+            if (confirma) {
+                alert("Agradecemos por você ter utilizado os serviços do Santander, " + nome + "! Foi um prazer ter você por aqui.");
+                window.close();
+            } else {
+                inicio();
+            }
+        }
+
+        inicio();
+
+    </script>
+</body>
+</html>
