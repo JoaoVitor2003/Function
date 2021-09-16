@@ -1,0 +1,38 @@
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+
+    <script>
+        
+        
+        function calcularMeuLanche(idade, quantidadedeLanchePorDia){
+            alert(idade)
+        
+
+        var idade = Number(prompt ("Qual a idade você quer chegar?"));
+        var lanches = 2
+        var resultado = idade / lanches
+        
+
+        if (idade <= 0){
+            document.write("Você informou um valor incorreto. ");
+        } else if (idade >= 70) {
+            document.write("Você informou um valor incorreto. ");
+        } else {
+            document.write("Você precisará de " +resultado + " lanches para durar até a idade " +idade + " anos. " );
+        }
+    }
+        calcularMeuLanche();
+        document.write("</br>");
+        calcularMeuLanche();
+        document.write("</br>");
+        calcularMeuLanche();
+        document.write("</br>");
+
+
+    </script>
+
+</head>
+</html>
