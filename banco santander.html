@@ -8,6 +8,12 @@
     <script>
         var senha = 3589;
         var saldo = 100.0;
+        var textrato = "Santander \n (14/09/2021) Carrefour: R$70,00 \n "
+        var data = new Date();
+        var dia = String(data.getDate()).padStart(2, '0');
+        var mes = String(data.getMonth() + 1).padStart(2, '0');
+        var ano = data.getFullYear();
+        dataAtual = "(" + dia + '/' + mes + '/' + ano + ")";
 
         alert("Bem-vindo(a) ao Santander!")
         var nome = prompt("Insira seu nome:");
@@ -51,7 +57,7 @@
 
         function extrato() {
             pedir_senha();
-            alert("Santander - Extratos \n (14/09/21) Tranferência: R$150,00 \n (14/09/21) Carrefour: R$70,00 \n (14/09/21) Saque: R$80,00");
+            alert(textrato);
             inicio();
         }
 
@@ -69,6 +75,7 @@
                 fazer_saque();
             } else {
                 saldo -= saque;
+                addExtrato( dataAtual + " Saque: -R$ " + saque);
                 ver_saldo();
 				inicio();
             }
@@ -86,6 +93,7 @@
 				escolha();
             } else {
                 saldo += deposito;
+                addExtrato( dataAtual + " Deposito: R$ " + deposito);
                 ver_saldo();
 				inicio();
             }
@@ -112,6 +120,7 @@
                 transferencia();
             } else {
                 saldo -= transferencia;
+                addExtrato( dataAtual + " Transferência: -R$ " + transferencia);
                 alert("Transferência efetuada com sucesso para a conta " + conta + "\n Saldo atual R$:" + saldo);
                 inicio();
             }
@@ -123,6 +132,7 @@
                 alert("Senha correta.");
             } else {
                 alert("Senha incorreta, tente novamente.");
+                inicio();
                 senha();
             }
         }
@@ -140,6 +150,11 @@
             } else {
                 inicio();
             }
+        }
+
+        // funcao de adicionar coisas no extrato
+        function addExtrato(msg) {
+            textrato = textrato + "\n" + msg;
         }
 
         inicio();
